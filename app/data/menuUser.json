@@ -1,0 +1,61 @@
+{
+    "mainMenu": [
+        {
+          "id":1,
+          "title": "Sản phẩm",
+          "link": "/san-pham",
+          "subMenu": []
+        },
+        {
+          "id":2,
+          "title": "Câu chuyện thương hiệu",
+          "link": "/#",
+          "subMenu": [
+            {
+              "title": "Về Phê La",
+              "link": "/ve-chung-toi"
+            },
+            {
+              "title": "Phong cách khác biệt",
+              "link": "/phong-cach-khac-biet-tai-phe-la"
+            }
+          ]
+        },
+        {
+          "id":3,
+          "title": "Tin tức",
+          "link": "/tin-tuc",
+          "subMenu": []
+        },
+        {
+          "id":4,
+          "title": "Cửa hàng",
+          "link": "/he-thong-cua-hang",
+          "subMenu": []
+        },
+        {
+          "id":5,
+          "title": "Tuyển dụng",
+          "link": "/tuyen-dung",
+          "subMenu": []
+        },
+        {
+          "id":6,
+          "title": "Thẻ thành viên",
+          "link": "/#",
+          "subMenu": [
+              {
+                  "title": "Điều khoản & điều lệ",
+                  "link": "/dieu-khoan-va-dieu-kien-su-dung-the-thanh-vien-phe-la"
+              }
+          ]
+        },
+        {
+          "id":7,
+          "title": "Liên hệ",
+          "link": "/lien-he",
+          "subMenu": []
+        }
+      ]
+  }
+  
