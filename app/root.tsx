@@ -84,15 +84,10 @@ const AppWithAuth = () => {
 
 export default function App() {
   return (
-    <>
-      <h1 style={{ color: 'red', fontSize: '48px', textAlign: 'center', padding: '20px' }}>
-        DEPLOYMENT TEST V1
-      </h1>
-      <AuthProvider>
-        <AppWithAuth />
-        <ToastContainer {...toastContainerConfig} />
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <AppWithAuth />
+      <ToastContainer {...toastContainerConfig} />
+    </AuthProvider>
   );
 }
 
