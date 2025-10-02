@@ -51,26 +51,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const initializeAuth = async () => {
       const storedUser = localStorage.getItem('user');
       const storedToken = localStorage.getItem('token');
-      
+
       if (storedUser && storedToken) {
         const parsedUser: User = JSON.parse(storedUser);
-        
+
         try {
           // Lấy thông tin người dùng từ API
-          const freshData = parsedUser.type === 'admin' 
+          const freshData = parsedUser.type === 'admin'
             ? await getAdminProfile(parsedUser.username)
             : await getCustomerProfile(parsedUser.username);
-          
+
           setUser({
             ...parsedUser,
             ...freshData
           });
         } catch (error) {
           console.error('Failed to refresh user data:', error);
-          setUser(parsedUser);
+          // setUser(parsedUser);
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          setUser(null);
         } finally {
           setLoading(false);
         }
+      } else {
+        setLoading(false);
       }
     };
 
@@ -119,23 +124,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const updateUserProfile = async (data: Partial<User>) => {
     if (!user) return;
-    
+
     try {
       setLoading(true);
       let updatedProfile;
-      
+
       if (user.type === 'admin') {
         const currentUsername = user.username;
         updatedProfile = await updateAdminProfile(user.username, data, currentUsername);
       } else {
         updatedProfile = await updateCustomerProfile(user.username, data);
       }
-      
+
       const updatedUser = {
         ...user,
         ...updatedProfile
       };
-      
+
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setUser(updatedUser);
     } catch (error) {
@@ -157,10 +162,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      login, 
-      logout: handleLogout, 
+    <AuthContext.Provider value={{
+      user,
+      login,
+      logout: handleLogout,
       loading,
       updateUserProfile
     }}>
