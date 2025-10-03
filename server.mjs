@@ -8,12 +8,13 @@ const port = process.env.PORT || 3000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Middleware để phục vụ các file tĩnh từ thư mục build/client
-// Đây là phần quan trọng nhất để sửa lỗi 404 cho các file assets
+// 1. Phục vụ tất cả các file tĩnh (js, css, images...) từ thư mục `build/client`
+// Bất kỳ request nào khớp với một file trong này sẽ được trả về ngay lập tức.
 app.use(express.static(join(__dirname, "build/client")));
 
-// Handler của React Router sẽ xử lý tất cả các request còn lại
-app.all("*", createRequestHandler({
+// 2. Với tất cả các request còn lại (không phải file tĩnh), hãy để React Router xử lý
+// Đây là phần render phía server (SSR) cho các trang của bạn.
+app.get("*", createRequestHandler({
   build: join(__dirname, "build"),
 }));
 
